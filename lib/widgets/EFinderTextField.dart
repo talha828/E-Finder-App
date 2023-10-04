@@ -7,6 +7,7 @@ class EFinderTextField extends StatefulWidget {
   final TextEditingController controller;
   final String hintText;
   final String label;
+  String? value;
   final bool obscureText;
   final IconData? prefixIcon;
   final Widget? prefixIconWidget;
@@ -15,9 +16,10 @@ class EFinderTextField extends StatefulWidget {
   final bool isDropdown;
   final List<String>? countryCodeList;
 
-  const EFinderTextField(
+  EFinderTextField(
       {required this.controller,
       required this.hintText,
+      this.value,
       this.prefixIcon,
       this.suffixIconData,
       required this.label,
@@ -33,6 +35,7 @@ class EFinderTextField extends StatefulWidget {
 }
 
 class _EFinderTextFieldState extends State<EFinderTextField> {
+  String selectedItem = "+92";
   bool obscureText = false;
   void _togglePasswordVisibility() {
     setState(() {
@@ -63,19 +66,34 @@ class _EFinderTextFieldState extends State<EFinderTextField> {
             children: [
               // Prefix Icon or Dropdown
               Container(
-                padding: const EdgeInsets.all(8.0),
+                padding: const EdgeInsets.only(left: 8),
                 child: widget.isDropdown
-                    ? DropdownButton<String>(
-                        value: widget.controller.text,
-                        onChanged: (newValue) {
-                          widget.controller.text = newValue!;
-                        },
-                        items: widget.countryCodeList!.map((String countryCode) {
-                          return DropdownMenuItem<String>(
-                            value: countryCode,
-                            child: Text(countryCode),
-                          );
-                        }).toList(),
+                    ? Row(
+                        children: [
+                          DropdownButtonHideUnderline(
+                            child: DropdownButton<String>(
+                              isDense: true,
+                              value: selectedItem,
+                              onChanged: (newValue) {
+                                widget.value = newValue;
+                                setState(() => selectedItem = newValue!);
+                              },
+                              items: widget.countryCodeList!
+                                  .map((String countryCode) {
+                                return DropdownMenuItem<String>(
+                                  value: countryCode,
+                                  child: Text(countryCode),
+                                );
+                              }).toList(),
+                            ),
+                          ),
+                          SizedBox(
+                            height: 20,
+                            child: VerticalDivider(
+                              color: Colors.grey.shade400,
+                            ),
+                          ),
+                        ],
                       )
                     : Icon(
                         widget.prefixIcon,
@@ -104,25 +122,29 @@ class _EFinderTextFieldState extends State<EFinderTextField> {
               // Suffix Icon
               if (widget.suffixIcon != null)
                 Container(
-                  padding:const EdgeInsets.all(8.0),
+                  padding: const EdgeInsets.all(8.0),
                   child: widget.suffixIcon is IconData
                       ? GestureDetector(
-                    onTap: widget.obscureText ? _togglePasswordVisibility : (){},
-                        child: obscureText? Icon(
-                     widget.suffixIcon,
-                    size: 24.0, // Adjust the size as needed
-                    color: textColor,
-                  ) :Image.asset(
-                          Assets.iconHideEye,
+                          onTap: widget.obscureText
+                              ? _togglePasswordVisibility
+                              : () {},
+                          child: obscureText
+                              ? Icon(
+                                  widget.suffixIcon,
+                                  size: 24.0, // Adjust the size as needed
+                                  color: textColor,
+                                )
+                              : Image.asset(
+                                  Assets.iconHideEye,
+                                  width: 24.0, // Adjust the size as needed
+                                  height: 24.0, // Adjust the size as needed
+                                ),
+                        )
+                      : Image.asset(
+                          widget.suffixIcon,
                           width: 24.0, // Adjust the size as needed
                           height: 24.0, // Adjust the size as needed
                         ),
-                      )
-                      : Image.asset(
-                    widget.suffixIcon,
-                    width: 24.0, // Adjust the size as needed
-                    height: 24.0, // Adjust the size as needed
-                  ),
                 ),
               // If suffixIcon is null, use an empty SizedBox
             ],

@@ -5,7 +5,9 @@ class Assets {
   static const String assetsLogo = 'assets/logo.png';
   static const String iconFacebook = 'assets/icon/facebook.png';
   static const String iconGoogle = 'assets/icon/google.png';
+  static const String iconHeight = 'assets/icon/height.png';
   static const String iconHideEye = 'assets/icon/hide_eye.png';
   static const String iconLinkedin = 'assets/icon/linkedin.png';
+  static const String iconProfile = 'assets/icon/profile.png';
 
 }

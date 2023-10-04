@@ -1,4 +1,7 @@
 import 'package:e_finder/constant/constant.dart';
+import 'package:e_finder/view/missing_person_complan_profile_screen/missing_person_complain_profile_screen.dart';
+import 'package:e_finder/view/organization_profile_screen/organize_profile_screen.dart';
+import 'package:e_finder/view/profile_screen/profile_screen.dart';
 import 'package:e_finder/view/signin_screen/signin_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -25,7 +28,7 @@ class MyApp extends StatelessWidget {
         ),
         useMaterial3: true,
       ),
-      home: const SignInScreen(),
+      home: const OrganizationProfileScreen(),
     );
   }
   MaterialColor createMaterialColor(Color color) {
