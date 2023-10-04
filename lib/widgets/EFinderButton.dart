@@ -17,7 +17,7 @@ class EFinderButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      onTap: onTap,
+      onTap: onTap ,
       child: Container(
         padding: EdgeInsets.symmetric(vertical: width * 0.04,horizontal: width * 0.04),
         alignment: Alignment.center,

@@ -1,6 +1,6 @@
-# e_finder
+# E-Finder-App
 
-A new Flutter project.
+A new Flutter project that help user to find there value-able stuff
 
 ## Getting Started
 
