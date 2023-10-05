@@ -8,7 +8,6 @@ import 'package:e_finder/widgets/EFinderDivider.dart';
 import 'package:e_finder/widgets/EFinderTextField.dart';
 import 'package:e_finder/widgets/socialLogin.dart';
 import 'package:e_finder/widgets/EFinderTextButton.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -88,9 +87,9 @@ class _SignInScreenState extends State<SignInScreen> {
                   height: 10,
                 ),
                 SocialLogin(
-                    withGoogle: ()=>Auth.googleHandleSignIn(),
-                    withFacebook: () {},
-                    withLinkedin: () {}),
+                    withGoogle: ()=>Auth.signInWithGoogle(),
+                    withFacebook: ()=>Auth.signInWithFacebook(),
+                    withLinkedin: ()=>Auth.signInWithLinkedin()),
                 const SizedBox(
                   height: 10,
                 ),
