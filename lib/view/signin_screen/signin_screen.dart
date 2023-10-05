@@ -1,3 +1,4 @@
+import 'package:e_finder/auth/auth.dart';
 import 'package:e_finder/constant/constant.dart';
 import 'package:e_finder/generated/assets.dart';
 import 'package:e_finder/view/registration_screen/registration_screen.dart';
@@ -7,6 +8,7 @@ import 'package:e_finder/widgets/EFinderDivider.dart';
 import 'package:e_finder/widgets/EFinderTextField.dart';
 import 'package:e_finder/widgets/socialLogin.dart';
 import 'package:e_finder/widgets/EFinderTextButton.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -18,13 +20,14 @@ class SignInScreen extends StatefulWidget {
 }
 
 class _SignInScreenState extends State<SignInScreen> {
+
   TextEditingController email = TextEditingController();
   TextEditingController password = TextEditingController();
+
   bool flag = true;
   bool _isChecked = false;
-  String label = "Sign In";
-  String text = "Sign In";
-  void Function()? onTap = () {};
+
+
 
   @override
   Widget build(BuildContext context) {
@@ -85,7 +88,7 @@ class _SignInScreenState extends State<SignInScreen> {
                   height: 10,
                 ),
                 SocialLogin(
-                    withGoogle: () {},
+                    withGoogle: ()=>Auth.googleHandleSignIn(),
                     withFacebook: () {},
                     withLinkedin: () {}),
                 const SizedBox(
