@@ -1,0 +1,54 @@
+{
+  "project_info": {
+    "project_number": "667478647611",
+    "project_id": "e-finder-application",
+    "storage_bucket": "e-finder-application.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:667478647611:android:a417ec0050ee5045ebcd1e",
+        "android_client_info": {
+          "package_name": "com.example.e_finder"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "667478647611-fsh4243da1l9ejt9gkbon6p02qm8h4sm.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.e_finder",
+            "certificate_hash": "62c22c890b2ed3378c795acd09b4a7b9a17e0740"
+          }
+        },
+        {
+          "client_id": "667478647611-d17qvam05cb5hv9afd2h50sq2mleg7ha.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCom1KTZBmmEv4SAGwcsDCArCYbiuwMS9M"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "667478647611-d17qvam05cb5hv9afd2h50sq2mleg7ha.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "667478647611-d5cgli4vla1to6l0436afcrp6f642dv2.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.example.efinder"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
