@@ -21,7 +21,7 @@ class SocialLogin extends StatelessWidget {
    bool logoutUser = false;
   final void Function()? withGoogle;
   final void Function()? withFacebook;
-  final void Function()? withLinkedin;
+  void Function(LinkedInUserModel)? withLinkedin;
 
   @override
   Widget build(BuildContext context) {
@@ -35,7 +35,7 @@ class SocialLogin extends StatelessWidget {
           destroySession: false,
           onError: (error) => print('Error: ${error.message}'),
           onGetAuthToken: (data) => print('Access token ${data.accessToken!}'),
-          onGetUserProfile: (user) => print('User: ${user.name}'),
+          onGetUserProfile: withLinkedin,
           child: Image.asset(
             Assets.iconLinkedin,
             width: 30, // Customize icon size as needed

@@ -1,31 +1,45 @@
+import 'package:e_finder/API/api.dart';
+import 'package:e_finder/model/userModel.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter_facebook_auth/flutter_facebook_auth.dart';
 import 'package:get/get.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 
+
 class Auth{
   Auth._();
 
-    static Future<bool> signInWithGoogle() async {
-
-      GoogleSignIn googleSignIn = GoogleSignIn(scopes: ['email',],);
-
-      GoogleSignInAccount? data;
-
+    static Future<bool?> signInWithGoogle() async {
       try {
+        final GoogleSignInAccount? googleSignInAccount =
+        await GoogleSignIn().signIn();
 
-         data =  await googleSignIn.signIn();
+        if (googleSignInAccount != null) {
+          final GoogleSignInAuthentication googleSignInAuthentication =
+          await googleSignInAccount.authentication;
 
+          final AuthCredential credential = GoogleAuthProvider.credential(
+            accessToken: googleSignInAuthentication.accessToken,
+            idToken: googleSignInAuthentication.idToken,
+          );
+
+          final UserCredential authResult =
+          await FirebaseAuth.instance.signInWithCredential(credential);
+          final User? user = authResult.user;
+          print("==== Google Login SuccessFul ====");
+          UserModel userModel = await API.registerUser(user!.displayName!, user!.email!, "Google", user!.uid);
+          print(userModel.data!.email.toString());
+          return user != null ?true:false;
+        }
       } catch (error) {
-
         Get.snackbar(
           "Google SignIn Failed",
           "Due to some reason Your Google SingIn Failed",
           snackPosition: SnackPosition.BOTTOM,
         );
-
+        print("Google Sign-In Error: $error");
+        return false;
       }
-      return data != null ? true : false ;
     }
 
     static Future<bool> signInWithFacebook() async {
@@ -39,8 +53,13 @@ class Auth{
         // Once signed in, return the UserCredential
         data = await FirebaseAuth.instance.signInWithCredential(credential);
 
-        print(data!.additionalUserInfo!.profile);
-        print(data!.additionalUserInfo!.username);
+        Get.snackbar(
+          "Facebook SignIn Successful",
+          "Hey Your Good by",
+          snackPosition: SnackPosition.BOTTOM,
+        );
+        // print(data!.additionalUserInfo!.profile);
+        // print(data!.additionalUserInfo!.username);
       }
     }catch (e){
 
@@ -57,18 +76,5 @@ class Auth{
     return data != null ? true :false;
 
   }
-
-    static Future<bool> signInWithLinkedin() async {
-
-      var data;
-
-      try{
-
-      }catch (e){
-
-      }
-      return data != null ? true :false;
-    }
-
 
 }

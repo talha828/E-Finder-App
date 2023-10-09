@@ -1,6 +1,8 @@
+import 'package:e_finder/API/api.dart';
 import 'package:e_finder/auth/auth.dart';
 import 'package:e_finder/constant/constant.dart';
 import 'package:e_finder/generated/assets.dart';
+import 'package:e_finder/model/userModel.dart';
 import 'package:e_finder/view/registration_screen/registration_screen.dart';
 import 'package:e_finder/widgets/CustomCheckboxWithForgetPassword.dart';
 import 'package:e_finder/widgets/EFinderButton.dart';
@@ -89,7 +91,10 @@ class _SignInScreenState extends State<SignInScreen> {
                 SocialLogin(
                     withGoogle: ()=>Auth.signInWithGoogle(),
                     withFacebook: ()=>Auth.signInWithFacebook(),
-                    withLinkedin: ()=>Auth.signInWithLinkedin()),
+                    withLinkedin: (user)async{
+                      UserModel userModel = await API.registerUser(user!.name!, user!.email!, "Google", user!.sub!);
+                      print(userModel.data!.email.toString());
+                    }),
                 const SizedBox(
                   height: 10,
                 ),
